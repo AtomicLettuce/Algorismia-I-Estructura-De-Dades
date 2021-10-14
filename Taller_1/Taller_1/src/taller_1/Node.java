@@ -2,8 +2,8 @@
 package taller_1;
 public class Node {
     
-    int info;
-    Node seg;
+    private int info;
+    private Node seg;
 
     // Constructor que estableix el camp info al valor enter passat per paràmetre
     public Node(int info) {
