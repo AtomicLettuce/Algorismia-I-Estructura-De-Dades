@@ -44,8 +44,8 @@ public class Llista {
     // Mètode que insereix un node a la posicio passada per parametre
     public void afegirPosicio(int pos, Node node) {
         Node aux = primer;
-        Node aux2=null;
-        for (int i = 0; i < pos-1; i++) {
+        Node aux2 = null;
+        for (int i = 0; i < pos - 1; i++) {
             // If preventiu ja que si s'ha introduit una posicio més gran que
             // el núm total de nodes es col·locara a la darrera posició
             if (aux != null) {
@@ -53,11 +53,43 @@ public class Llista {
                 aux = aux.getSeg();
             }
         }
-        if(aux2!=null){
+        if (aux2 != null) {
             node.setSeg(aux);
             aux2.setSeg(node);
-        }else{
+        } else {
             System.out.println("no s'ha pogut posar el node en la posicio desitjtada");
+        }
+
+    }
+
+    // Mètode que retorna el node situat a la posició passada per paràmetre
+    public Node getNode(int pos) {
+        Node aux = primer;
+        for (int i = 0; i < pos; i++) {
+            if (aux != null) {
+                aux = aux.getSeg();
+            }
+        }
+        return aux;
+    }
+
+    // Mètode que elimina el node situat a la posició passada per paràmetre
+    public void eliminarNode(int pos) {
+        Node aux = primer;
+        Node aux2 = null;
+        
+        // Cercam el node que està a la posicio indicada
+        for (int i = 0; i < pos-1; i++) {
+            if (aux != null) {
+                aux2 = aux;
+                aux = aux.getSeg();
+            }
+        }
+        // Feim el canvi de punters si és que existeix tal posició
+        if (aux != null) {
+            aux2.setSeg(aux.getSeg());
+        }else{
+            System.out.println("No existeix tal posicio");
         }
 
     }
