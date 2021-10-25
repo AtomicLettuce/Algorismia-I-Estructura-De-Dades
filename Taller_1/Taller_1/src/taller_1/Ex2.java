@@ -39,6 +39,7 @@ public class Ex2 {
                     break;
                 case '3':
                     lliures.imprimeixLlista();
+                    menu();
                     break;
                 case '4':
                     System.exit(0);
@@ -54,15 +55,20 @@ public class Ex2 {
 
 // Mètode que crea les dues llistes
     public void crearLlista() {
-        llista = new Llista(new Node(1));
-        for (int i = 2; i < 16; i++) {
-            llista.afegirFinal(new Node(i));
-        }
 
-        lliures = new Llista(new Node(new Random().nextInt(300)));
-        for (int i = 0; i < 7; i++) {
-            lliures.afegirFinal(new Node(new Random().nextInt(300)));
+        System.out.println("Introdueix el nombre de nodes que tindrà la llista");
+        int num = new LT().llegirSencer();
+        llista = new Llista(null);
+        /* for (int i = 1; i < 15; i++) {
+            llista.afegirInici(new Node(new Random().nextInt(100)));
+        }*/
+
+        for (int i = 0; i < num; i++) {
+            System.out.println("Introdueix la info del node: " + (i + 1));
+            int info = new LT().llegirSencer();
+            llista.afegirInici(new Node(info));
         }
+        lliures = new Llista(new Node(0));
     }
 
     public static void main(String[] args) {

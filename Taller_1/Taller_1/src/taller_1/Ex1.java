@@ -1,6 +1,5 @@
 package taller_1;
 
-
 import java.util.Random;
 
 public class Ex1 {
@@ -9,6 +8,7 @@ public class Ex1 {
     char opcioMenu;
     Node nounode;
     int posicio;
+    int num;
 
     public void inici() {
         crearLlista();
@@ -27,9 +27,16 @@ public class Ex1 {
             switch (opcioMenu) {
                 case '1':
                     System.out.println("Introdueix valor del camp info");
-                    int num = new LT().llegirSencer();
+                    num = new LT().llegirSencer();
+                    System.out.println("introdueix posicio");
+                    posicio = new LT().llegirSencer();
                     nounode = new Node(num);
-                    llista.afegirPosicio(num, nounode);
+                    if (posicio == 1) {
+                        llista.afegirInici(nounode);
+                    } else {
+
+                        llista.afegirPosicio(posicio, nounode);
+                    }
                     menu();
                     break;
                 case '2':
@@ -52,10 +59,19 @@ public class Ex1 {
 
     // Mètode que crea una llista amb 15 elements amb els camp info aleatoris
     public void crearLlista() {
-        llista = new Llista(new Node(new Random().nextInt(100)));
-        for (int i = 1; i < 15; i++) {
+
+        System.out.println("Introdueix el nombre de nodes que tindrà la llista");
+        int num = new LT().llegirSencer();
+        llista = new Llista(null);
+        /* for (int i = 1; i < 15; i++) {
             llista.afegirInici(new Node(new Random().nextInt(100)));
+        }*/
+        for (int i = 0; i < num; i++) {
+            System.out.println("Introdueix la info del node: " + (i + 1));
+            int info = new LT().llegirSencer();
+            llista.afegirInici(new Node(info));
         }
+
     }
 
     public static void main(String[] args) {
