@@ -10,7 +10,6 @@ package Practica1;
  * @author Xavier
  */
 public class Main {
-
     /**
      * @param args the command line arguments
      */
