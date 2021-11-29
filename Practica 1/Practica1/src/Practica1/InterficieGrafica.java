@@ -1,4 +1,4 @@
-package javaapplication27;
+package Practica1;
 
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -31,21 +31,54 @@ public class InterficieGrafica extends JFrame {
     }
 
     private void crearMenu() {
+        // Inicialitzam barra de Menú
         barraMenu = new JMenuBar();
-        JMenu menu = new JMenu("Menu");
-        JMenuItem item1 = new JMenuItem("item1");
-        item1.addActionListener(new gestorEventsMenu());
-        JMenuItem item2 = new JMenuItem("item2");
-        item2.addActionListener(new gestorEventsMenu());
-        JMenuItem item3 = new JMenuItem("item3");
-        item3.addActionListener(new gestorEventsMenu());
 
-        menu.add(item1);
-        menu.add(item2);
-        menu.add(item3);
+        // Cream i inicialitzam els diferents menús
+        JMenu altes = new JMenu("Altes");
+        JMenu baixes = new JMenu("Baixes");
+        JMenu matricular = new JMenu("Matricular");
+        JMenu veure = new JMenu("Veure");
 
-        barraMenu.add(menu);
+        // Inserim els items de cada menú i el seu gestor d'events
+        
+        //Menú d'ALTES
+        JMenuItem aCurs = new JMenuItem("Alta Curs");
+        aCurs.addActionListener(new gestorEventsMenu());
+        altes.add(aCurs);
 
+        // Menú de BAIXES
+        JMenuItem bCurs = new JMenuItem("Baixa Curs");
+        bCurs.addActionListener(new gestorEventsMenu());
+        baixes.add(bCurs);
+        
+        JMenuItem bAss = new JMenuItem("Baixa Assignatura");
+        bAss.addActionListener(new gestorEventsMenu());
+        baixes.add(bAss);
+        
+        // Menú MATRICULAR
+        JMenuItem mAlu = new JMenuItem("Matricular Alumne");
+        mAlu.addActionListener(new gestorEventsMenu());
+        matricular.add(mAlu);
+        
+        // Menú VEURE
+        JMenuItem vAssCurs = new JMenuItem("Veure Assignatura de Curs");
+        vAssCurs.addActionListener(new gestorEventsMenu());
+        veure.add(vAssCurs);
+        
+        JMenuItem vCursAssAlu = new JMenuItem("Veure Curs d'Assignatura i Alumnes");
+        vCursAssAlu.addActionListener(new gestorEventsMenu());
+        veure.add(vCursAssAlu);
+        
+        JMenuItem vAssEst = new JMenuItem("Veure Assignatures d'Estudiants");
+        vAssEst.addActionListener(new gestorEventsMenu());
+        veure.add(vAssEst);
+        
+
+        barraMenu.add(altes);
+        barraMenu.add(baixes);
+        barraMenu.add(matricular);
+        barraMenu.add(veure);
         this.setJMenuBar(barraMenu);
     }
 
@@ -53,6 +86,7 @@ public class InterficieGrafica extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent event) {
+            System.out.println(event.getActionCommand());
             switch (event.getActionCommand()) {
                 case "item1":
                     break;
