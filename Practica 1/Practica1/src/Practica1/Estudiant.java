@@ -1,17 +1,19 @@
 package Practica1;
 
-public class Estudiant {
-    
+import Interfaces.IntfDades;
 
-private String nom;
-private int DNI;
-private Estudiant seg;
+public class Estudiant implements IntfDades {
+
+    private String nom;
+    private int DNI;
+    private Estudiant seg;
 
     public Estudiant(String nom, int DNI) {
         this.nom = nom;
         this.DNI = DNI;
     }
 
+    @Override
     public String getNom() {
         return nom;
     }
@@ -20,7 +22,8 @@ private Estudiant seg;
         this.nom = nom;
     }
 
-    public int getDNI() {
+    @Override
+    public int getCodi() {
         return DNI;
     }
 
@@ -38,9 +41,7 @@ private Estudiant seg;
 
     @Override
     public String toString() {
-        return "Estudiant{" + "nom=" + nom + ", DNI=" + DNI +'}';
+        return "Estudiant{" + "nom=" + nom + ", DNI=" + DNI + '}';
     }
 
-    
-    
 }

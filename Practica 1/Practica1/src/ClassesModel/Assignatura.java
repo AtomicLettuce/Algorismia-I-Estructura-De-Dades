@@ -1,16 +1,18 @@
 package ClassesModel;
 
-public class Assignatura {
-    
-    
-protected String nom;
-protected int codi;
+import Interfaces.IntfDades;
+
+public class Assignatura implements IntfDades{
+
+    protected String nom;
+    protected int codi;
 
     public Assignatura(String nom, int codi) {
         this.nom = nom;
         this.codi = codi;
     }
 
+    @Override
     public String getNom() {
         return nom;
     }
@@ -19,6 +21,7 @@ protected int codi;
         this.nom = nom;
     }
 
+    @Override
     public int getCodi() {
         return codi;
     }
@@ -32,5 +35,4 @@ protected int codi;
         return "Assignatures{" + "nom=" + nom + ", codi=" + codi + '}';
     }
 
-    
 }
