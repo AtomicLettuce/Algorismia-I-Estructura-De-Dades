@@ -1,4 +1,4 @@
-package Intefaces;
+package Interfaces;
 public interface IntfLlista {
     
     public int length();
