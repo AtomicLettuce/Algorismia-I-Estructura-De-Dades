@@ -27,5 +27,11 @@ public class FP extends Curs {
     public String getEspecialitat() {
         return especialitat;
     }
+
+    @Override
+    public String toString() {
+        return "Nom: " +nom+" Codi: "+ codi + "especialitat=" + especialitat + '}';
+    }
+    
     
 }

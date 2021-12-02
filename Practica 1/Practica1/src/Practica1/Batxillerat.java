@@ -25,4 +25,9 @@ public class Batxillerat extends Curs {
         return Curs;
     }
 
+    @Override
+    public String toString() {
+        return "Nom: "+nom+" Codi:"+codi+" Batxillerat{" + "Curs=" + Curs + '}';
+    }
+    
 }

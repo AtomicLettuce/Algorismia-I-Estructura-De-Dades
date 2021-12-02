@@ -36,7 +36,7 @@ public class lecturaDatos extends JDialog {
     //literales de los conceptos demandados para introducir     
     public lecturaDatos(JFrame frame, String[] campos) {
         super(frame, true);
-        setTitle("INTRODUCCIÓN DATOS");
+        setTitle("INTRODUCCIÓ INFORMACIÓ");
 
         //el número de componentes de campos (número de conceptos) representa
         //el número de valores a introducir
