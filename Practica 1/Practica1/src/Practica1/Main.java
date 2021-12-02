@@ -196,11 +196,7 @@ public class Main extends JFrame {
                    
                     break;
                 case "Veure Assignatures d'Estudiants":
-                    //Llegim de teclat
-                    String aux[]={"el","pepe","maikol","uwu","iofgbvusefdbu"};
-                    System.out.println(new lecturaJRB(finestra,"ESKELER",aux).getSeleccionat());
-                    
-                    //resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioDniEst).getDatosTexto();
+                    resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioDniEst).getDatosTexto();
                     break;
             }
             // Posam el punter a null per evitar possibles problemes
@@ -214,23 +210,26 @@ public class Main extends JFrame {
             String[] resultatUsuariOpt;
             Ass_Optativa opt;
             Ass_Obligatoria obl;
-            
+            int opcio;
             resultatUsuari=new lecturaDatos(finestra,literalsAss).getDatosTexto();
             //La finestra sortira tantes vegades com assignatures
             for (int i = 0; i < Integer.parseInt(resultatUsuari[0]); i++) {
-            //FER FINESTRA RADIOBUTTONS PER ELEGIR
-            /*Si obligatoria seleccionada
-            if(obligatoria.selected){*/
+            //Llegim de teclat
+            String aux[]={"Obligatòria","Optativa"};
+            opcio=new lecturaJRB(finestra,"TIPUS ASSIGNATURA",aux).getSeleccionat();
+            //Si obligatoria seleccionada
+            if(opcio==0){
             resultatUsuariObl= new lecturaDatos(finestra, literalsObl).getDatosTexto();
             obl= new Ass_Obligatoria(resultatUsuariObl[0],Integer.parseInt(resultatUsuariObl[1]), Integer.parseInt(resultatUsuariObl[2]));
             assignatures.add(obl);
-            /*else{ si optativa seleccionada*/
+            }else{ //si optativa seleccionada
             resultatUsuariOpt= new lecturaDatos(finestra, literalsOpt).getDatosTexto();
             opt= new Ass_Optativa(resultatUsuariOpt[0],Integer.parseInt(resultatUsuariOpt[1]), Integer.parseInt(resultatUsuariOpt[2]));
             assignatures.add(opt);
             }
+            assignatures.ordenar(assignatures);
             
-            
+            }
         }
 
     }

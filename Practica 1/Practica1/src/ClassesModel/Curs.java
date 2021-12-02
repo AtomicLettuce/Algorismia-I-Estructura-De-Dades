@@ -4,7 +4,8 @@ public class Curs {
 
     protected String nom;
     protected int codi;
-
+    protected Curs seg;
+    
     public Curs(String nom, int codi) {
         this.nom = nom;
         this.codi = codi;
@@ -26,6 +27,14 @@ public class Curs {
         this.codi = codi;
     }
 
+    public Curs getSeg() {
+        return seg;
+    }
+
+    public void setSeg(Curs seg) {
+        this.seg = seg;
+    }
+    
     @Override
     public String toString() {
         return "Cursos{" + "nom=" + nom + ", codi=" + codi + '}';
