@@ -36,10 +36,20 @@ public class Llista_Ass extends ArrayList {
             }
         });
     }
+    public Assignatura trobat(int codi, Llista_Ass lista){
+        Assignatura aux=null;
+        for (int i = 0; i < lista.size(); i++) {
+            aux=(Assignatura)lista.get(i);
+            if(aux.getCodi()!=codi){
+                aux=null;
+            }   
+        }  
+     return aux;    
+    }
 
     //EN CAS IMPLEMENTAR ARRAY
     public void imprimeixLlistaAss(Llista_Ass assignatures) {
         System.out.println(assignatures);
     }
-
 }
+

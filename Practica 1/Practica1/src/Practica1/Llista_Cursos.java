@@ -28,26 +28,33 @@ public class Llista_Cursos {
     public void setPrimer(Curs primer) {
         this.primer = primer;
     }
-    //FALTA CONTROL ERROR SI NO TROBA CODI!!!!
-    public Curs cercadorcurs(String [] resultatusuari){
-        int codi= Integer.parseInt(resultatusuari[0]);
+    
+    //Mètode implementa un cercador de cursos segons el codi pasat per param
+    public Curs cercadorcurs(String resultatusuari){
+        int codi= Integer.parseInt(resultatusuari);
         Curs aux = primer;
-        while(aux.getSeg()!=null){
-            if(aux.getCodi()==codi){
-               aux.setSeg(null);
+        Curs aux2=null;
+        while(aux!=null){
+            if((aux.getCodi()==codi)){
+              aux2=aux;
+              aux.setSeg(null);
             }
             aux=aux.getSeg();
         }
-        return aux;
+        return aux2;
+    }
+    
+    public void eliminarElement(int codi){
+        // ELIMINAR CURS
     }
     
     public void imprimeixLLista(){
         Curs aux = primer;
+        Llista_Ass prova;
         System.out.println("-----Inici de llista-----");
         while (aux != null) {
             System.out.println(aux.toString());
-            aux = aux.getSeg();
-          
+            aux = aux.getSeg();  
         }
         System.out.println("-----Final de llista-----");
     }

@@ -38,5 +38,10 @@ public class Ass_Optativa extends Assignatura {
     public void setTipus(String tipus) {
         this.perfil = tipus;
     }
+
+    @Override
+    public String toString() {
+       return "Nom: " +nom+" Codi: "+ codi + "Optativa{" + "perfil=" + perfil + '}';
+    }
     
 }

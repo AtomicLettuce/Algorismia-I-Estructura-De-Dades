@@ -7,10 +7,14 @@ public class Curs implements IntfDades {
     protected String nom;
     protected int codi;
     protected Curs seg;
-    
+    protected int[] referenciesAss;
+    // Variable que compta quantes Assignatures s'han afegit al curs
+    protected int nAss;
+
     public Curs(String nom, int codi) {
         this.nom = nom;
         this.codi = codi;
+        this.nAss = 0;
     }
 
     @Override
@@ -27,6 +31,48 @@ public class Curs implements IntfDades {
         this.nom = nom;
     }
 
+    public int[] getReferenciesAss(){
+        return referenciesAss;
+    }
+    
+    
+    
+    // Mètode que inicialitza l'array de Referències a Assignatures
+    public void inicialitzarLlistaAss(int num) {
+        referenciesAss = new int[num];
+        // L'inicialitzam tot a -1 per evitar possibles problemes
+        for (int i = 0; i < referenciesAss.length; i++) {
+            referenciesAss[i] = -1;
+        }
+    }
+
+    public void afegirAss(int codi) {
+        // Afegim el nou codi a l'array de referències i incrementam en 1 nAss
+        // per tal de que la pròxima vegada que usem el mètode apunti on toca
+        referenciesAss[nAss] = codi;
+        nAss++;
+    }
+
+    public void eliminarAss(int codi) {
+        // Cream array auxiliar
+        int[] aux = new int[referenciesAss.length];
+        // Recorrem tot l'array
+        for (int i = 0, j = 0; i < referenciesAss.length; i++) {
+            // Mentre que no sigui el codi indicat seguim copiant
+            if (referenciesAss[i] != codi) {
+                aux[j] = referenciesAss[i];
+                j++;
+            }
+            // Si hem trobat el codi indicat NO EL COPIAM, decrementam nAss en 1
+            // i posam la darrera casella a -1 per indicar que no hi ha cap assignatura en aquella posició
+            if (referenciesAss[i] == codi) {
+                nAss--;
+                aux[referenciesAss.length-1]=-1;
+            }
+        }
+        referenciesAss=aux;
+    }
+
     public void setCodi(int codi) {
         this.codi = codi;
     }
@@ -38,12 +84,10 @@ public class Curs implements IntfDades {
     public void setSeg(Curs seg) {
         this.seg = seg;
     }
-    
+
     @Override
     public String toString() {
         return "Cursos{" + "nom=" + nom + ", codi=" + codi + '}';
     }
-    
-    
 
 }

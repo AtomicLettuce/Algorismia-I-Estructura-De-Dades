@@ -23,6 +23,11 @@ public class Ass_Obligatoria extends Assignatura {
     public int getNcredits() {
         return ncredits;
     }
+
+    @Override
+    public String toString() {
+       return "Nom: " +nom+" Codi: "+ codi + " Obligatoria{" + "credits=" + ncredits + '}';
+    }
     
 
 }

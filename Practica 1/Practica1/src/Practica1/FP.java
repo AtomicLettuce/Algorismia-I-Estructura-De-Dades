@@ -6,6 +6,7 @@ public class FP extends Curs {
 
     protected String especialitat;
 
+  
     public FP(String nom, int codi, int opcio) throws ErrorEntradaIncorrecta {
         super(nom, codi);
         switch (opcio) {
@@ -30,7 +31,7 @@ public class FP extends Curs {
 
     @Override
     public String toString() {
-        return "Nom: " +nom+" Codi: "+ codi + "especialitat=" + especialitat + '}';
+        return "Nom: " +nom+" Codi: "+ codi + " Especialitat=" + especialitat + '}';
     }
     
     
