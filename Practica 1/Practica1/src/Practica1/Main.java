@@ -1,5 +1,7 @@
 package Practica1;
 
+import ClassesModel.Assignatura;
+import ClassesModel.Curs;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +15,7 @@ public class Main extends JFrame {
     JMenuBar barraMenu;
     JFrame finestra = this;
     Llista_Cursos cursos=new Llista_Cursos(null);
-    Llista_Ass assignatures= new Llista_Ass(null);
+    
     // Constructor de la interficie grafica
     public Main() {
         // Establim mida i titol de la finestra
@@ -115,7 +117,8 @@ public class Main extends JFrame {
         String[] literalsIntroduccioVeureAssCurs = {"Codi del Curs (int)"};
         String[] literalsIntroduccioCodiAss = {"Codi de l'Assignatura (int)"};
         String[] literalsIntroduccioDniEst = {"Dni de l'Estudiant (int)"};
-
+        String[] literalsIntroduccioMatr={"Nom de l'estudiant", "Dni(int): "};
+        
         @Override
         public void actionPerformed(ActionEvent event) {
             System.out.println(event.getActionCommand());
@@ -125,9 +128,9 @@ public class Main extends JFrame {
                     resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioFP).getDatosTexto();
                      {
                         try {
-                            FP curs1 = new FP(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]), 1);
+                            FP curs1 = new FP(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]),null, 1);
                             cursos.afegirprimer(curs1);
-                            afegirAss();
+                            afegirAss(curs1);
                             
                         } catch (ErrorEntradaIncorrecta ex) {
                             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -139,9 +142,9 @@ public class Main extends JFrame {
                     resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioFP).getDatosTexto();
                     
                     try {
-                        FP curs2 = new FP(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]), 2);
+                        FP curs2 = new FP(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]),null, 2);
                         cursos.afegirprimer(curs2);
-                        afegirAss();
+                        afegirAss(curs2);
                         
                     } catch (ErrorEntradaIncorrecta ex) {
                         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -151,9 +154,10 @@ public class Main extends JFrame {
                     //Llegim de teclat
                     resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioFP).getDatosTexto();
                     try {
-                        FP curs3 = new FP(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]), 3);
+                        FP curs3 = new FP(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]),null, 3);
+                        afegirAss(curs3);
                         cursos.afegirprimer(curs3);
-                        afegirAss();
+                        
                     } catch (ErrorEntradaIncorrecta ex) {
                         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -164,9 +168,10 @@ public class Main extends JFrame {
                      {
                         try {
                             Batxillerat batxiller = new Batxillerat(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]),
-                                    Integer.parseInt(resultatUsuari[2]));
+                            null,Integer.parseInt(resultatUsuari[2]));
+                            afegirAss(batxiller);
                             cursos.afegirprimer(batxiller);
-                            afegirAss();
+                            
                         } catch (ErrorEntradaIncorrecta ex) {
                             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -181,18 +186,22 @@ public class Main extends JFrame {
                     //Llegim de teclat
                     resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioCodiAss).getDatosTexto();
                     break;
-                case "Matricular Alumne d'Assignatura...":
+                case "Matricular Alumne d'Assignatura.":
+                    resultatUsuari= new lecturaDatos(finestra, literalsIntroduccioMatr).getDatosTexto();
+                    Estudiant est= new Estudiant(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]));
+                    //matriculacio(est);
                     break;
                 case "Veure Assignatures de Curs":
                     //Llegim de teclat
                     resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioVeureAssCurs).getDatosTexto();
-                    assignatures.imprimeixLlistaAss(assignatures);
-
+                    impressioCurs(resultatUsuari);
+                    
                     break;
                 case "Veure Curs d'Assignatura i Alumnes":
                     //Llegim de teclat
                     resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioCodiAss).getDatosTexto();
-                   
+                    impressioAss(resultatUsuari);
+                    
                     break;
                 case "Veure Assignatures d'Estudiants":
                     resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioDniEst).getDatosTexto();
@@ -201,7 +210,8 @@ public class Main extends JFrame {
             // Posam el punter a null per evitar possibles problemes
             resultatUsuari = null;
         }
-        public void afegirAss(){
+        public void afegirAss(Curs curs){
+            Llista_Ass assignatures= new Llista_Ass(null);
             String[] literalsAss = {"Número assignatures afegir (int):" };
             String[] literalsObl = { "NOM:", "CODI (int):","Número de crèdits(int)"};
             String[] literalsOpt = { "NOM:", "CODI (int):","Perfil(1=Pràctic,2=Teòric)"};
@@ -227,9 +237,57 @@ public class Main extends JFrame {
             assignatures.add(opt);
             }
             assignatures.ordenar(assignatures);
-            
+            curs.setAssignatures(assignatures);
             }
         }
+        /*
+         public void matriculacio(Estudiant alumne){
+            Curs cercat;
+            Llista_Ass ass;
+            //Demanam usuari de quin curs es vol matricular.
+            String[] resultatcurs= new lecturaDatos(finestra,literalsIntroduccioBaixaCurs).getDatosTexto();
+            cercat=cursos.cercadorcurs(resultatcurs);
+            //Si s'ha trobat el curs
+            if(cercat!=null){
+              ass=cercat.getAssignatures();
+              
+            }else{
+                System.out.println("NO S'HA TROBAT EL CURS!!!");  
+            } 
+        }*/
+         
+        //Aquest mètode cerca un curs i mostra la seva llista d'assignatures i alumnes matriculats
+         public void impressioCurs(String [] resultatUsuari){
+             Curs curs= cursos.cercadorcurs(resultatUsuari);
+             Llista_Ass ass_curs;
+             //Si s'ha trobat el curs
+             if(curs!=null){
+                 //Obtenem les assignatures del curs i les mostram per pantalla
+                 ass_curs=curs.getAssignatures();
+                 System.out.println(curs.toString());
+                 System.out.println("");
+                 ass_curs.imprimeixLlistaAss(ass_curs);
+             }else{
+                 System.out.println("No s'ha trobat el curs");
+             }
+         }
+         
+         public void impressioAss(String[] resultatUsuari){
+             Assignatura cercada;
+             Llista_Ass llista;
+             Curs aux= cursos.getPrimer();
+             
+             while((aux!=null)){
+                 llista=aux.getAssignatures();
+                 cercada=llista.trobat(Integer.parseInt(resultatUsuari[0]), llista);
+                 if(cercada!=null){
+                     //OBTENIR LLISTA EST I IMPRIMIR PANTALLA
+                     System.out.println(aux.toString());
+                     aux.setSeg(null);
+                 }
+                 aux=aux.getSeg();
+             }
+         }
 
     }
 
