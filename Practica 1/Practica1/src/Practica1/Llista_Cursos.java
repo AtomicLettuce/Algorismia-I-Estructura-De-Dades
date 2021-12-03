@@ -30,8 +30,8 @@ public class Llista_Cursos {
     }
     
     //Mètode implementa un cercador de cursos segons el codi pasat per param
-    public Curs cercadorcurs(String [] resultatusuari){
-        int codi= Integer.parseInt(resultatusuari[0]);
+    public Curs cercadorcurs(String resultatusuari){
+        int codi= Integer.parseInt(resultatusuari);
         Curs aux = primer;
         Curs aux2=null;
         while(aux!=null){
@@ -44,6 +44,9 @@ public class Llista_Cursos {
         return aux2;
     }
     
+    public void eliminarElement(int codi){
+        // ELIMINAR CURS
+    }
     
     public void imprimeixLLista(){
         Curs aux = primer;

@@ -6,8 +6,8 @@ public class Batxillerat extends Curs {
 
     protected String Curs;
 
-    public Batxillerat(String nom, int codi,Llista_Ass assignatures, int opcio) throws ErrorEntradaIncorrecta {
-        super(nom, codi, assignatures);
+    public Batxillerat(String nom, int codi, int opcio) throws ErrorEntradaIncorrecta {
+        super(nom, codi);
         switch (opcio) {
             case 1:
                 Curs = "Primer";
