@@ -5,37 +5,47 @@
  */
 package Practica1;
 
-import ClassesModel.Assignatura;
+import Interfaces.IntfLlista;
 
 /**
  *
  * @author aturs
  */
 //segons una assignatura estudiants matriculats
-public class Llista_RefEst {
-    private Estudiant primer;
-    
-    public Llista_RefEst(Estudiant referencia){
-       primer= referencia;
+public class Llista_RefEst implements IntfLlista {
+
+    int length = 0;
+    NodeReferenciaEstudiant primer = null;
+
+    @Override
+    public int length() {
+        return length;
     }
-    public void afegirSeg(Estudiant seg){
-         seg.setSeg(primer);
-        primer = seg;
-    }
-    public void ordenarEst(){
+
+    @Override
+    public void afegirElement(Object obj) {
+        NodeReferenciaEstudiant aux = primer;        
         
     }
-  // Mètode que imprimeix per pantalla tot el contingut de la llista
-    public void imprimeixLlistaAss() {
-        Estudiant aux= primer;
-        int posicio = 1;
-        System.out.println("-----Inici de llista-----");
-        while(aux!=null){
-         System.out.println("Posicio = ");
-            aux = aux.getSeg();
-            posicio++;
-        }   
-        
-        System.out.println("-----Final de llista-----");
-    }   
+
+    @Override
+    public Object getElement(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean compte(Object obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void sort() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void eliminarElement(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
