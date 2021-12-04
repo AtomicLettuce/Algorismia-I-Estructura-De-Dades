@@ -10,7 +10,7 @@ public interface IntfLlista {
     public Object getElement(int i);
     
     // Per comprovar si la llista ja compté l'element obj
-    public boolean compte(Object obj);
+    public boolean compte(int codi);
     
     // Per ordenar la llista
     public void sort();
@@ -18,9 +18,7 @@ public interface IntfLlista {
     // Per eliminar l'element i-èssim
     public void eliminarElement(int i);
     
-    
-    // Per convertir la llista en un String
-    @Override
-    public String toString();
+    // afegeix un element a la posició i-èssima
+    public void afegirElement(Object obj, int pos);
     
 }
