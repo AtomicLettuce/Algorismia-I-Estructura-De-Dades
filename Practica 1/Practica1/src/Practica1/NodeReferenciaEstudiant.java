@@ -21,7 +21,7 @@ public class NodeReferenciaEstudiant {
     }
 
     // Mètodes Getters dels atributs
-    public int getInfo() {
+    public int getCodi() {
         return codi;
     }
 
