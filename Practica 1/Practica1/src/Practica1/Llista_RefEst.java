@@ -61,7 +61,22 @@ public class Llista_RefEst implements IntfLlista {
 
     @Override
     public void sort() {
-        //FER SORT
+        // Ens guardam el tamany total de la llista
+        int N = length();
+        // Algorisme de la bombollas
+        for (int i = 0; i < N - 1; i++) {
+            for (int j = 0; j < N - 1; j++) {
+                // Si l'element j és major que l'element j+1 intercanviam posicions
+                if (getElement(j).getCodi() > getElement(j+1).getCodi()) {
+                    // Guardam l'element j
+                    NodeReferenciaEstudiant aux = getElement(j);
+                    // Llevam l'element j de la llista de manera que l'element j+1 passa a ocupar la posició j
+                    eliminarElement(j);
+                    // Afegim el node que ens hem guardat abans a la posició j+1
+                    afegirElement(aux,j+1);
+                }
+            }
+        }
     }
 
     @Override
