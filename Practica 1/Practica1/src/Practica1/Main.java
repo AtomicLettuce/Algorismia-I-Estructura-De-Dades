@@ -146,6 +146,7 @@ public class Main extends JFrame {
         String[] literalsIntroduccioCodiAss = {"Codi de l'Assignatura (int)"};
         String[] literalsIntroduccioDniEst = {"Dni de l'Estudiant (int)"};
         String[] literalsIntroduccioMatr = {"Nom de l'estudiant", "Dni(int): "};
+        String [] literalsBaixaAss={"Codi de l'Assignatura a eliminar (int)"};
 
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -207,10 +208,23 @@ public class Main extends JFrame {
                 case "Baixa Curs":
                     //Llegim de teclat
                     resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioBaixaCurs).getDatosTexto();
+                    
                     break;
                 case "Baixa Assignatura":
-                    //Llegim de teclat
-                    resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioCodiAss).getDatosTexto();
+                    // Demanam a l'usuari el codi del curs del que vol eliminar l'assignatura
+                    resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioVeureAssCurs).getDatosTexto();
+                    // Ens situam al curs del que volem eliminar una assignatura
+                    Curs curs=cursos.cercadorcurs(Integer.parseInt(resultatUsuari[0]));
+                    // Obtenim el codi de l'assignatura a eliminar
+                    resultatUsuari = new lecturaDatos(finestra, literalsBaixaAss).getDatosTexto();
+                    // Donam de baixa tots els estudiants
+                    Assignatura ass=assignatures.cercadorAss(Integer.parseInt(resultatUsuari[0]));
+                    // Donam de baixa els estudiants
+                    ass.eliminarEstudiants();
+                    // Eliminam l'assignatura sel·leccionada
+                    curs.eliminarAss(Integer.parseInt(resultatUsuari[0]));
+                    
+                    
                     break;
                 case "Matricular Alumne d'Assignatura.":
                     resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioMatr).getDatosTexto();
@@ -305,7 +319,7 @@ public class Main extends JFrame {
         //Aquest mètode cerca un curs i mostra la seva llista d'assignatures i alumnes matriculats
         public void impressioCurs(String resultatUsuari) {
             //Cercam l'assignatura passada pel codi 
-            Curs curs = cursos.cercadorcurs(resultatUsuari);
+            Curs curs = cursos.cercadorcurs(Integer.parseInt(resultatUsuari));
             int[] ass_curs;
             Assignatura aux;
             //Si s'ha trobat el curs
@@ -320,11 +334,11 @@ public class Main extends JFrame {
                 ass_curs = curs.getReferenciesAss();
                 // Les imprimim
                 for (int i = 0; i < ass_curs.length; i++) {
-                    aux = assignatures.cercadorAss(ass_curs[i], assignatures);
+                    aux = assignatures.cercadorAss(ass_curs[i]);
                     System.out.println(aux.toString());
                 }
             } else {
-                System.out.println("No s'ha trobat el curs");
+                JOptionPane.showMessageDialog(null, "ERROR: NO S'HA TROBAT EL CURS");
             }
         }
 

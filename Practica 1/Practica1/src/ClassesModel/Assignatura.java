@@ -64,7 +64,7 @@ public class Assignatura implements IntfDades {
     }
 
     // Per donar de baixa tots els alumnes de l'assignatura
-    public void eliminarLlista() {
+    public void eliminarEstudiants() {
         llistaEst = new Llista_RefEst();
     }
 }

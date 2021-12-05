@@ -6,10 +6,6 @@
 package Practica1;
 
 import ClassesModel.Assignatura;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  *
@@ -44,17 +40,19 @@ public class Llista_Ass {
     }
     
     //Mètode implementa un cercador de cursos segons el codi pasat per param
-    public Assignatura cercadorAss(int codi,Llista_Ass assignatures){
-        
-        Assignatura aux = assignatures.primer;
-        Assignatura aux2=null;
+    public Assignatura cercadorAss(int codi){
+        // Variable auxiliar per cercar l'assignatura
+        Assignatura aux = primer;
+        // Mentre no haguem arribat al final, segueix iterant
         while(aux!=null){
+            // Si hem trobat l'assignatura, retorna
             if((aux.getCodi()==codi)){
-              aux2=aux;
+              return aux;
             }
             aux=aux.getSeg();
         }
-        return aux2;
+        // Si no l'hem trobada, retorna null
+        return null;
     }
     /*
     public void afegirAss(Assignatura ass) {

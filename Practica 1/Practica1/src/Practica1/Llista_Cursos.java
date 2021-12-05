@@ -30,18 +30,18 @@ public class Llista_Cursos {
     }
     
     //Mètode implementa un cercador de cursos segons el codi pasat per param
-    public Curs cercadorcurs(String resultatusuari){
-        int codi= Integer.parseInt(resultatusuari);
+    public Curs cercadorcurs(int codi){
+        // Variable auxiliar per fer la cerca
         Curs aux = primer;
-        Curs aux2=null;
+        // Mentre no haguem arribat al final, segueix iterant
         while(aux!=null){
+            // Si l'hem trobat, retorna'l
             if((aux.getCodi()==codi)){
-              aux2=aux;
-              aux.setSeg(null);
+                return aux;
             }
             aux=aux.getSeg();
         }
-        return aux2;
+        return null;
     }
     
     public void eliminarElement(int codi){
