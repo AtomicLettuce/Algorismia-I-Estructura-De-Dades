@@ -19,7 +19,6 @@ public class Ass_Obligatoria extends Assignatura {
     public Ass_Obligatoria(String nom, int codi, int ncredits, Curs curs) {
         super(nom, codi, curs);
         this.ncredits = ncredits;
-        esObligatoria=true;
     }
 
     public int getNcredits() {

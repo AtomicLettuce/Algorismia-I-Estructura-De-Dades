@@ -54,6 +54,7 @@ public class Main extends JFrame {
         JTextArea label = new JTextArea();
         label.setText(text);
         label.setSize(600, 800);
+        label.setEditable(false);
         funcions.add(label);
         // Per evitar problemes d'actualització de finestra
         setVisible(true);
@@ -370,6 +371,8 @@ public class Main extends JFrame {
                 cercada = assignatures.getElement(codi);
                 cercada.afegirEstudiant(est);
                 estudiants.setPrimer(alumne);
+            }else{
+                JOptionPane.showMessageDialog(null, "ERROR EN L'ENTRADA DE DADES");
             }
         }
 
@@ -418,7 +421,6 @@ public class Main extends JFrame {
                 }
                 //Continuam itinerant a la llista i obtenim array ref
                 aux = aux.getSeg();
-
             }
         }
     }

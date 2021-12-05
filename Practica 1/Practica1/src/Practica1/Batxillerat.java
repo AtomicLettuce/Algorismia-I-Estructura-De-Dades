@@ -19,7 +19,6 @@ public class Batxillerat extends Curs {
             default:
                 throw new ErrorEntradaIncorrecta();
         }
-        esFP=false;
     }
 
     public String getCurs() {
