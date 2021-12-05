@@ -49,6 +49,16 @@ public class Main extends JFrame {
         this.getContentPane().add(titol);
     }
 
+    // Funció que passat un String per paràmetre el mostra per pantalla a un JLabel
+    public void mostrarText(String text) {
+        JTextArea label = new JTextArea();
+        label.setText(text);
+        label.setSize(600, 800);
+        funcions.add(label);
+        // Per evitar problemes d'actualització de finestra
+        setVisible(true);
+    }
+
     private void MostrarGif() {
         //Get the URL
         titol = new JPanel();
@@ -153,132 +163,148 @@ public class Main extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent event) {
-            System.out.println(event.getActionCommand());
-            switch (event.getActionCommand()) {
-                case "Alta Curs FP Mecànica":
-                    //Llegim de teclat
-                    resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioFP).getDatosTexto();
-                     {
+            try {
+                System.out.println(event.getActionCommand());
+                switch (event.getActionCommand()) {
+                    case "Alta Curs FP Mecànica":
+                        //Llegim de teclat
+                        resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioFP).getDatosTexto();
+                         {
+                            try {
+                                FP curs1 = new FP(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]), 1);
+                                cursos.afegirElement(curs1);
+                                afegirAss(curs1);
+                            } catch (ErrorEntradaIncorrecta ex) {
+                                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        break;
+                    case "Alta Curs FP Electrònica":
+                        //Llegim de teclat
+                        resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioFP).getDatosTexto();
+
                         try {
-                            FP curs1 = new FP(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]), 1);
-                            cursos.afegirElement(curs1);
-                            afegirAss(curs1);
+                            FP curs2 = new FP(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]), 2);
+                            cursos.afegirElement(curs2);
+                            afegirAss(curs2);
+
                         } catch (ErrorEntradaIncorrecta ex) {
                             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    }
-                    break;
-                case "Alta Curs FP Electrònica":
-                    //Llegim de teclat
-                    resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioFP).getDatosTexto();
-
-                    try {
-                        FP curs2 = new FP(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]), 2);
-                        cursos.afegirElement(curs2);
-                        afegirAss(curs2);
-
-                    } catch (ErrorEntradaIncorrecta ex) {
-                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    break;
-                case "Alta Curs FP Informàtica":
-                    //Llegim de teclat
-                    resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioFP).getDatosTexto();
-                    try {
-                        FP curs3 = new FP(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]), 3);
-                        afegirAss(curs3);
-                        cursos.afegirElement(curs3);
-
-                    } catch (ErrorEntradaIncorrecta ex) {
-                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    break;
-                case "Alta Curs Batx.":
-                    //Llegim de teclat
-                    resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioBatx).getDatosTexto();
-                     {
+                        break;
+                    case "Alta Curs FP Informàtica":
+                        //Llegim de teclat
+                        resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioFP).getDatosTexto();
                         try {
+                            FP curs3 = new FP(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]), 3);
+                            afegirAss(curs3);
+                            cursos.afegirElement(curs3);
+
+                        } catch (ErrorEntradaIncorrecta ex) {
+                            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        break;
+                    case "Alta Curs Batx.":
+                        //Llegim de teclat
+                        resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioBatx).getDatosTexto();
+                         {
                             Batxillerat batxiller = new Batxillerat(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]), Integer.parseInt(resultatUsuari[2]));
                             afegirAss(batxiller);
                             cursos.afegirElement(batxiller);
-
-                        } catch (ErrorEntradaIncorrecta ex) {
-                            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    }
-                    break;
+                        break;
 
-                case "Baixa Curs":
-                    //Llegim de teclat
-                    resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioBaixaCurs).getDatosTexto();
+                    case "Baixa Curs":
+                        //Llegim de teclat                    
+                        resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioBaixaCurs).getDatosTexto();
 
-                    break;
-                case "Baixa Assignatura":
-                    // Demanam a l'usuari el codi del curs del que vol eliminar l'assignatura
-                    resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioVeureAssCurs).getDatosTexto();
-                    // Ens situam al curs del que volem eliminar una assignatura
-                    Curs curs = cursos.getElement(Integer.parseInt(resultatUsuari[0]));
-                    // Obtenim el codi de l'assignatura a eliminar
-                    resultatUsuari = new lecturaDatos(finestra, literalsBaixaAss).getDatosTexto();
-                    // Donam de baixa tots els estudiants
-                    Assignatura ass = assignatures.getElement(Integer.parseInt(resultatUsuari[0]));
-                    // Donam de baixa els estudiants
-                    ass.eliminarEstudiants();
-                    // Eliminam l'assignatura sel·leccionada
-                    curs.eliminarAss(Integer.parseInt(resultatUsuari[0]));
-                    // Eliminam l'assignatura de la llista global d'assignatures
-                    assignatures.eliminarElement(Integer.parseInt(resultatUsuari[0]));
+                        Curs cursB = cursos.getElement(Integer.parseInt(resultatUsuari[0]));
 
-                    break;
-                case "Matricular Alumne d'Assignatura":
-                    resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioMatr).getDatosTexto();
-                    Estudiant alumne = new Estudiant(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]));
-                    NodeReferenciaEstudiant est = new NodeReferenciaEstudiant(Integer.parseInt(resultatUsuari[1]));
-                    matriculacio(alumne, est);
-                    break;
-                case "Veure Assignatures de Curs":
-                    //Llegim de teclat
-                    resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioVeureAssCurs).getDatosTexto();
-                    impressioCurs(resultatUsuari[0]);
+                        int[] refAss = cursB.getReferenciesAss();
 
-                    break;
-                case "Veure Curs d'Assignatura i Alumnes":
-                    //Llegim de teclat
-                    resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioCodiAss).getDatosTexto();
-                    impressioAss(resultatUsuari[0]);
+                        // Eliminam els estudiant de cada assignatura
+                        for (int i = 0; i < refAss.length; i++) {
+                            Assignatura ass=assignatures.getElement(refAss[i]);
+                            ass.eliminarEstudiants();
+                        }
+                        // Eliminam assignatures
+                        cursB.eliminarAss();
+                        // Eliminam els cursos
+                        cursos.eliminarElement(cursB.getCodi());
+                        
+                        mostrarText("Estudiants desmatriculats satisfactoriament\nAssignatures eliminades satisfactoriament\nCurs eliminat satisfactoriament");
+                        
+                        
+                        break;
+                    case "Baixa Assignatura":
+                        // Demanam a l'usuari el codi del curs del que vol eliminar l'assignatura
+                        resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioVeureAssCurs).getDatosTexto();
+                        // Ens situam al curs del que volem eliminar una assignatura
+                        Curs curs = cursos.getElement(Integer.parseInt(resultatUsuari[0]));
+                        // Obtenim el codi de l'assignatura a eliminar
+                        resultatUsuari = new lecturaDatos(finestra, literalsBaixaAss).getDatosTexto();
+                        // Donam de baixa tots els estudiants
+                        Assignatura ass = assignatures.getElement(Integer.parseInt(resultatUsuari[0]));
+                        // Donam de baixa els estudiants
+                        ass.eliminarEstudiants();
+                        // Eliminam l'assignatura sel·leccionada
+                        curs.eliminarAss(Integer.parseInt(resultatUsuari[0]));
+                        // Eliminam l'assignatura de la llista global d'assignatures
+                        assignatures.eliminarElement(Integer.parseInt(resultatUsuari[0]));
 
-                    break;
-                case "Veure Assignatures d'Estudiants":
-                    // Obtenim el DNI de l'estudiant
-                    resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioDniEst).getDatosTexto();
+                        break;
+                    case "Matricular Alumne d'Assignatura":
+                        resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioMatr).getDatosTexto();
+                        Estudiant alumne = new Estudiant(resultatUsuari[0], Integer.parseInt(resultatUsuari[1]));
+                        NodeReferenciaEstudiant est = new NodeReferenciaEstudiant(Integer.parseInt(resultatUsuari[1]));
+                        matriculacio(alumne, est);
+                        break;
+                    case "Veure Assignatures de Curs":
+                        //Llegim de teclat
+                        resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioVeureAssCurs).getDatosTexto();
+                        impressioCurs(resultatUsuari[0]);
 
-                    // Cream un Array d'Assignatures que comptindrà les totes les assignatures que cursa l'estudiant
-                    Assignatura[] assEst = new Assignatura[0];
-                    // Comprovam a la llista global d'assignatures
-                    for (int i = 0; i < assignatures.length(); i++) {
-                        Assignatura aux = assignatures.getElementPos(i);
-                        // Si trobam una assignatura cursada per l'alumne en qüestió, augmentam en 1 l'array i la posam al final de tot
-                        if (aux.compte(Integer.parseInt(resultatUsuari[0]))) {
-                            Assignatura[] assEssAux = new Assignatura[assEst.length + 1];
-                            for (int j = 0; j < assEst.length; j++) {
-                                assEssAux[j] = assEst[j];
+                        break;
+                    case "Veure Curs d'Assignatura i Alumnes":
+                        //Llegim de teclat
+                        resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioCodiAss).getDatosTexto();
+                        impressioAss(resultatUsuari[0]);
+
+                        break;
+                    case "Veure Assignatures d'Estudiants":
+                        // Obtenim el DNI de l'estudiant
+                        resultatUsuari = new lecturaDatos(finestra, literalsIntroduccioDniEst).getDatosTexto();
+                        // Cream un Array d'Assignatures que comptindrà les totes les assignatures que cursa l'estudiant
+                        Assignatura[] assEst = new Assignatura[0];
+                        // Comprovam a la llista global d'assignatures
+                        for (int i = 0; i < assignatures.length(); i++) {
+                            Assignatura aux = assignatures.getElementPos(i);
+                            // Si trobam una assignatura cursada per l'alumne en qüestió, augmentam en 1 l'array i la posam al final de tot
+                            if (aux.compte(Integer.parseInt(resultatUsuari[0]))) {
+                                Assignatura[] assEssAux = new Assignatura[assEst.length + 1];
+                                for (int j = 0; j < assEst.length; j++) {
+                                    assEssAux[j] = assEst[j];
+                                }
+                                assEssAux[assEssAux.length - 1] = aux;
+                                assEst = assEssAux;
                             }
-                            assEssAux[assEssAux.length - 1] = aux;
-                            assEst = assEssAux;
                         }
-                    }
-                    // Ara l'array assEst compté totes les assignatures cursades per l'estudiant;
+                        // Ara l'array assEst compté totes les assignatures cursades per l'estudiant;
 
-                    String str = "L'estudiant amb DNI: " + resultatUsuari[0] + " cursa les següents:\n";
-                    System.out.println(str);
-                    for (int i = 0; i < assEst.length; i++) {
-                        str = str + assEst[i].toString() + "\n";
-                    }
-                    System.out.println(str);
-                    break;
+                        String str = "L'estudiant amb DNI: " + resultatUsuari[0] + " cursa les següents:\n";
+                        System.out.println(str);
+                        for (int i = 0; i < assEst.length; i++) {
+                            str = str + assEst[i].toString() + "\n";
+                        }
+                        mostrarText(str);
+                        System.out.println(str);
+                        break;
+                }
+                // Posam el punter a null per evitar possibles problemes
+                resultatUsuari = null;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "ERROR ENTRADA INCORRECTA");
             }
-            // Posam el punter a null per evitar possibles problemes
-            resultatUsuari = null;
         }
 
         public void afegirAss(Curs curs) {
