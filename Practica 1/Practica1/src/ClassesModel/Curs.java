@@ -31,12 +31,10 @@ public class Curs implements IntfDades {
         this.nom = nom;
     }
 
-    public int[] getReferenciesAss(){
+    public int[] getReferenciesAss() {
         return referenciesAss;
     }
-    
-    
-    
+
     // Mètode que inicialitza l'array de Referències a Assignatures
     public void inicialitzarLlistaAss(int num) {
         referenciesAss = new int[num];
@@ -67,10 +65,26 @@ public class Curs implements IntfDades {
             // i posam la darrera casella a -1 per indicar que no hi ha cap assignatura en aquella posició
             if (referenciesAss[i] == codi) {
                 nAss--;
-                aux[referenciesAss.length-1]=-1;
+                aux[referenciesAss.length - 1] = -1;
             }
         }
-        referenciesAss=aux;
+        referenciesAss = aux;
+    }
+
+    //ordenacio d'array pel metode de la bombolla.Atenció ordena de menor a major
+    public int[] ordenacioReferencies(int[] referencies) {
+        int aux_elem;
+        for (int i = 0; i < referencies.length - 1; i++) {
+            for (int j = 1; j < referencies.length; j++) {
+                if (referencies[j] < referencies[j - 1]) {   // si el elemento anterior es mayor, hacemos el cambio
+                    aux_elem = referencies[j];
+                    referencies[j] = referencies[j - 1];
+                    referencies[j - 1] = aux_elem;
+
+                }
+            }
+        }
+        return referencies;
     }
 
     public void setCodi(int codi) {
