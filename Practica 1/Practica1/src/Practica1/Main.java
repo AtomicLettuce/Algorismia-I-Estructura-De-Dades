@@ -314,8 +314,11 @@ public class Main extends JFrame {
 
                 System.out.println(curs.toString());
                 System.out.println("\n");
+                //Ordenam les assignatures del curs
+                curs.ordenacioReferencies();
+                // Les guardam per poder imprimir-les per pantalla
                 ass_curs = curs.getReferenciesAss();
-                ass_curs = curs.ordenacioReferencies(ass_curs);
+                // Les imprimim
                 for (int i = 0; i < ass_curs.length; i++) {
                     aux = assignatures.cercadorAss(ass_curs[i], assignatures);
                     System.out.println(aux.toString());

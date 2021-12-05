@@ -52,8 +52,10 @@ public class Curs implements IntfDades {
     }
 
     public void eliminarAss(int codi) {
-        // Cream array auxiliar
-        int[] aux = new int[referenciesAss.length];
+        // Booleana que controlarà si s'ha eliminat l'element donat
+        boolean eliminat = false;
+        // Cream array auxiliar d'una posició menys
+        int[] aux = new int[referenciesAss.length - 1];
         // Recorrem tot l'array
         for (int i = 0, j = 0; i < referenciesAss.length; i++) {
             // Mentre que no sigui el codi indicat seguim copiant
@@ -65,26 +67,27 @@ public class Curs implements IntfDades {
             // i posam la darrera casella a -1 per indicar que no hi ha cap assignatura en aquella posició
             if (referenciesAss[i] == codi) {
                 nAss--;
-                aux[referenciesAss.length - 1] = -1;
+                eliminat = true;
             }
         }
-        referenciesAss = aux;
+        if (eliminat) {
+            referenciesAss = aux;
+        }
     }
 
     //ordenacio d'array pel metode de la bombolla.Atenció ordena de menor a major
-    public int[] ordenacioReferencies(int[] referencies) {
+    public void ordenacioReferencies() {
         int aux_elem;
-        for (int i = 0; i < referencies.length - 1; i++) {
-            for (int j = 1; j < referencies.length; j++) {
-                if (referencies[j] < referencies[j - 1]) {   // si el elemento anterior es mayor, hacemos el cambio
-                    aux_elem = referencies[j];
-                    referencies[j] = referencies[j - 1];
-                    referencies[j - 1] = aux_elem;
+        for (int i = 0; i < referenciesAss.length - 1; i++) {
+            for (int j = 1; j < referenciesAss.length; j++) {
+                if (referenciesAss[j] < referenciesAss[j - 1]) {   // si el elemento anterior es mayor, hacemos el cambio
+                    aux_elem = referenciesAss[j];
+                    referenciesAss[j] = referenciesAss[j - 1];
+                    referenciesAss[j - 1] = aux_elem;
 
                 }
             }
         }
-        return referencies;
     }
 
     public void setCodi(int codi) {
