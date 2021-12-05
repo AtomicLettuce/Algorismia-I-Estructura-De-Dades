@@ -79,6 +79,7 @@ public class Llista_RefEst implements IntfLlista {
         }
     }
 
+    // Per eliminar l'element i-èssim
     @Override
     public void eliminarElement(int i) {
         if (i == 0) {

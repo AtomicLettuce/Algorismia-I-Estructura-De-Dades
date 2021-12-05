@@ -15,7 +15,7 @@ public interface IntfLlista {
     // Per ordenar la llista
     public void sort();
     
-    // Per eliminar l'element i-èssim
+    // Per eliminar l'element i
     public void eliminarElement(int i);
     
     // afegeix un element a la posició i-èssima
