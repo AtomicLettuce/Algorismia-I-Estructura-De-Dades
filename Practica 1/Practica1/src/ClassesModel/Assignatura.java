@@ -10,11 +10,19 @@ public class Assignatura implements IntfDades {
     protected int codi;
     protected Assignatura seg;
     protected Llista_RefEst llistaEst;
+    protected boolean esObligatoria;
+    protected Curs curs;
 
-    public Assignatura(String nom, int codi) {
+    public Assignatura(String nom, int codi, Curs curs) {
         this.nom = nom;
         this.codi = codi;
         this.llistaEst = new Llista_RefEst();
+        this.curs=curs;
+    }
+
+    public boolean esObligatoria(){
+        return esObligatoria;
+        
     }
 
     @Override
@@ -66,5 +74,9 @@ public class Assignatura implements IntfDades {
     // Per donar de baixa tots els alumnes de l'assignatura
     public void eliminarEstudiants() {
         llistaEst = new Llista_RefEst();
+    }
+
+    public boolean compte(int dni) {
+        return llistaEst.compte(dni);
     }
 }

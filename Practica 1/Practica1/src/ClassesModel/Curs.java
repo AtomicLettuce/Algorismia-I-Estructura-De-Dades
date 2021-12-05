@@ -10,13 +10,27 @@ public class Curs implements IntfDades {
     protected int[] referenciesAss;
     // Variable que compta quantes Assignatures s'han afegit al curs
     protected int nAss;
+    protected boolean esFP;
+
 
     public Curs(String nom, int codi) {
         this.nom = nom;
         this.codi = codi;
         this.nAss = 0;
     }
-
+    public boolean compte(int codi){
+        for(int i=0;i<referenciesAss.length;i++){
+            if(referenciesAss[i]==codi){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean esFP(){
+        return esFP;
+    }
+    
     @Override
     public String getNom() {
         return nom;
@@ -104,7 +118,7 @@ public class Curs implements IntfDades {
 
     @Override
     public String toString() {
-        return "Cursos{" + "nom=" + nom + ", codi=" + codi + '}';
+        return "Cursos{" + "nom=" + nom + ", codi=" + codi + "}";
     }
 
 }
