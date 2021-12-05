@@ -335,19 +335,7 @@ public class Main extends JFrame {
     }
 
     public static void main(String[] args) {
-        Llista_RefEst l=new Llista_RefEst();
-        l.afegirElement(new NodeReferenciaEstudiant(1));
-        l.afegirElement(new NodeReferenciaEstudiant(15));
-        l.afegirElement(new NodeReferenciaEstudiant(3));
-        l.afegirElement(new NodeReferenciaEstudiant(99));
-        l.afegirElement(new NodeReferenciaEstudiant(77));
-        
-        l.sort();
-        
-        //System.out.println(l);
-        
-        
-        //new Main();
+        new Main();
     }
 
 }
