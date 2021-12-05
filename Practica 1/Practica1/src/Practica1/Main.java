@@ -269,15 +269,17 @@ public class Main extends JFrame {
                     if (opcio == 0) {
                         resUsuari = new lecturaDatos(finestra, literalsObl).getDatosTexto();
                         obl = new Ass_Obligatoria(resUsuari[0], Integer.parseInt(resUsuari[1]), Integer.parseInt(resUsuari[2]));
-                        assignatures.add(obl);
+                        //assignatures.add(obl);
+                        assignatures.afegirprimer(obl);
                         curs.afegirAss(Integer.parseInt(resUsuari[1]));
                     } else { //si optativa seleccionada
                         resUsuari = new lecturaDatos(finestra, literalsOpt).getDatosTexto();
                         opt = new Ass_Optativa(resUsuari[0], Integer.parseInt(resUsuari[1]), Integer.parseInt(resUsuari[2]));
-                        assignatures.add(opt);
+                        //assignatures.add(opt);
+                        assignatures.afegirprimer(opt);
                         curs.afegirAss(Integer.parseInt(resUsuari[1]));
                     }
-                    assignatures.ordenar(assignatures);
+                    //assignatures.ordenar(assignatures);
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR EN L'ENTRADA DE DADES, ABORTANT");
@@ -302,34 +304,47 @@ public class Main extends JFrame {
         }*/
         //Aquest mètode cerca un curs i mostra la seva llista d'assignatures i alumnes matriculats
         public void impressioCurs(String resultatUsuari) {
+            //Cercam l'assignatura passada pel codi 
             Curs curs = cursos.cercadorcurs(resultatUsuari);
-            Llista_Ass ass_curs;
+            int[] ass_curs;
+            Assignatura aux;
             //Si s'ha trobat el curs
             if (curs != null) {
                 //Obtenem les assignatures del curs i les mostram per pantalla
-                ass_curs = curs.getAssignatures();
+
                 System.out.println(curs.toString());
-                System.out.println("");
-                ass_curs.imprimeixLlistaAss(ass_curs);
+                System.out.println("\n");
+                ass_curs = curs.getReferenciesAss();
+                ass_curs = curs.ordenacioReferencies(ass_curs);
+                for (int i = 0; i < ass_curs.length; i++) {
+                    aux = assignatures.cercadorAss(ass_curs[i], assignatures);
+                    System.out.println(aux.toString());
+                }
             } else {
                 System.out.println("No s'ha trobat el curs");
             }
         }
 
         public void impressioAss(String resultatUsuari) {
-            Assignatura cercada;
-            Llista_Ass llista;
+            //Aquest és el codi de cerca
+            int c = Integer.parseInt(resultatUsuari);
+            //Ens situam en el primer curs de la llista
             Curs aux = cursos.getPrimer();
-
+            //Obtenim array de referencies d'assigantures del curs
+            int codis[];
+            //Recorrem llista de cursos
             while ((aux != null)) {
-                llista = aux.getAssignatures();
-                cercada = llista.trobat(Integer.parseInt(resultatUsuari), llista);
-                if (cercada != null) {
-                    //OBTENIR LLISTA EST I IMPRIMIR PANTALLA
-                    System.out.println(aux.toString());
-                    aux.setSeg(null);
+                codis = aux.getReferenciesAss();
+                //Recorrem array de ref assignatures
+                for (int i = 0; i < codis.length; i++) {
+                    //Si es el mateix codi obtenim curs i sortim bucle
+                    if (c == codis[i]) {
+                        System.out.println(aux.toString());
+                    }
                 }
+                //Continuam itinerant a la llista i obtenim array ref
                 aux = aux.getSeg();
+
             }
         }
     }
