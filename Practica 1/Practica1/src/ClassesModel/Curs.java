@@ -27,6 +27,10 @@ public class Curs implements IntfDades {
         return false;
     }
     
+    public void eliminarAss(){
+        referenciesAss=null;
+    }
+    
     public boolean esFP(){
         return esFP;
     }
