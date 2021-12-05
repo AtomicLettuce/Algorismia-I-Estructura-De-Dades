@@ -6,6 +6,7 @@
 package Practica1;
 
 import ClassesModel.Assignatura;
+import ClassesModel.Curs;
 
 /**
  *
@@ -15,9 +16,10 @@ public class Ass_Obligatoria extends Assignatura {
 
     protected int ncredits;
 
-    public Ass_Obligatoria(String nom, int codi, int ncredits) {
-        super(nom, codi);
+    public Ass_Obligatoria(String nom, int codi, int ncredits, Curs curs) {
+        super(nom, codi, curs);
         this.ncredits = ncredits;
+        esObligatoria=true;
     }
 
     public int getNcredits() {
@@ -26,7 +28,8 @@ public class Ass_Obligatoria extends Assignatura {
 
     @Override
     public String toString() {
-       return "Nom: " +nom+" Codi: "+ codi + " Obligatoria{" + "credits=" + ncredits + '}';
+       return "Nom: " +nom+" Codi: "+ codi + " Tipus: Obligatoria " + " Credits: " + ncredits + "}\n"
+               + "\tdel Curs: "+curs.toString();
     }
     
 

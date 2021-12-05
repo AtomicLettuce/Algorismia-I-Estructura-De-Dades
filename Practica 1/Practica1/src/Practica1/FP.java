@@ -22,6 +22,7 @@ public class FP extends Curs {
             default:
                 throw new ErrorEntradaIncorrecta();
         }
+        esFP=true;
 
     }
 
@@ -31,7 +32,7 @@ public class FP extends Curs {
 
     @Override
     public String toString() {
-        return "Nom: " +nom+" Codi: "+ codi + " Especialitat=" + especialitat + '}';
+        return "Nom: " +nom+" Codi: "+ codi + " Especialitat=" + especialitat + "}";
     }
     
     
