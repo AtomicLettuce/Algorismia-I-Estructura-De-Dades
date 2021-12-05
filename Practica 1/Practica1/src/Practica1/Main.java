@@ -218,7 +218,7 @@ public class Main extends JFrame {
                     // Obtenim el codi de l'assignatura a eliminar
                     resultatUsuari = new lecturaDatos(finestra, literalsBaixaAss).getDatosTexto();
                     // Donam de baixa tots els estudiants
-                    Assignatura ass=assignatures.cercadorAss(Integer.parseInt(resultatUsuari[0]));
+                    Assignatura ass=assignatures.getElement(Integer.parseInt(resultatUsuari[0]));
                     // Donam de baixa els estudiants
                     ass.eliminarEstudiants();
                     // Eliminam l'assignatura sel·leccionada
@@ -284,13 +284,13 @@ public class Main extends JFrame {
                         resUsuari = new lecturaDatos(finestra, literalsObl).getDatosTexto();
                         obl = new Ass_Obligatoria(resUsuari[0], Integer.parseInt(resUsuari[1]), Integer.parseInt(resUsuari[2]));
                         //assignatures.add(obl);
-                        assignatures.afegirprimer(obl);
+                        assignatures.afegirElement(obl);
                         curs.afegirAss(Integer.parseInt(resUsuari[1]));
                     } else { //si optativa seleccionada
                         resUsuari = new lecturaDatos(finestra, literalsOpt).getDatosTexto();
                         opt = new Ass_Optativa(resUsuari[0], Integer.parseInt(resUsuari[1]), Integer.parseInt(resUsuari[2]));
                         //assignatures.add(opt);
-                        assignatures.afegirprimer(opt);
+                        assignatures.afegirElement(opt);
                         curs.afegirAss(Integer.parseInt(resUsuari[1]));
                     }
                     //assignatures.ordenar(assignatures);
@@ -334,7 +334,7 @@ public class Main extends JFrame {
                 ass_curs = curs.getReferenciesAss();
                 // Les imprimim
                 for (int i = 0; i < ass_curs.length; i++) {
-                    aux = assignatures.cercadorAss(ass_curs[i]);
+                    aux = assignatures.getElement(ass_curs[i]);
                     System.out.println(aux.toString());
                 }
             } else {
