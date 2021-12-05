@@ -223,7 +223,8 @@ public class Main extends JFrame {
                     ass.eliminarEstudiants();
                     // Eliminam l'assignatura sel·leccionada
                     curs.eliminarAss(Integer.parseInt(resultatUsuari[0]));
-                    
+                    // Eliminam l'assignatura de la llista global d'assignatures
+                    assignatures.eliminarElement(Integer.parseInt(resultatUsuari[0]));
                     
                     break;
                 case "Matricular Alumne d'Assignatura.":
