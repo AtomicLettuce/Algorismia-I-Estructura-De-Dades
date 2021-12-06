@@ -8,7 +8,7 @@ import Interfaces.IntfLlista;
 
 public class Llista_Cursos implements IntfLlista {
 
-    private Curs primer = null;
+    private Curs primer;
 
     @Override
     public int length() {
@@ -22,7 +22,7 @@ public class Llista_Cursos implements IntfLlista {
     }
 
     public Llista_Cursos(Curs primer) {
-        this.primer = primer;
+        primer=null;
     }
 
     @Override

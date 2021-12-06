@@ -10,7 +10,6 @@ public class Assignatura implements IntfDades {
     protected int codi;
     protected Assignatura seg;
     protected Llista_RefEst llistaEst;
-    protected boolean esObligatoria;
     protected Curs curs;
 
     public Assignatura(String nom, int codi, Curs curs) {
@@ -20,11 +19,12 @@ public class Assignatura implements IntfDades {
         this.curs=curs;
     }
 
-    public boolean esObligatoria(){
-        return esObligatoria;
-        
-    }
 
+    public int[] getDNIs(){
+        return llistaEst.getDnis();
+    }
+    
+    
     @Override
     public String getNom() {
         return nom;
@@ -51,11 +51,18 @@ public class Assignatura implements IntfDades {
         this.seg = seg;
     }
 
-    @Override
-    public String toString() {
-        return "Assignatures{" + "nom=" + nom + ", codi=" + codi + '}';
+    public Curs getCurs() {
+        return curs;
     }
 
+    @Override
+    public String toString() {
+        return "Assignatures{" + "nom=" + nom + ", codi=" + codi + "}"+curs.toString();
+    }
+    
+    public String toString2() {
+        return "Assignatures{" + "nom=" + nom + ", codi=" + codi + "}";
+    }
     // Mètode per ordenar la llista d'estudiants d'una assignatura
     public void ordenarEst() {
         llistaEst.sort();
@@ -75,7 +82,9 @@ public class Assignatura implements IntfDades {
     public void eliminarEstudiants() {
         llistaEst = new Llista_RefEst();
     }
-
+     public Llista_RefEst getLlistaRefEst() {
+        return llistaEst;
+    }
     public boolean compte(int dni) {
         return llistaEst.compte(dni);
     }

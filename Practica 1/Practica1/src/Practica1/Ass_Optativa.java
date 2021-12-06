@@ -30,7 +30,6 @@ public class Ass_Optativa extends Assignatura {
                 System.out.println("ERROR, TIPUS INCORRECTE");
                 break;
         }
-        esObligatoria = false;
     }
 
     public String getTipus() {

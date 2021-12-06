@@ -22,7 +22,6 @@ public class FP extends Curs {
             default:
                 throw new ErrorEntradaIncorrecta();
         }
-        esFP=true;
 
     }
 

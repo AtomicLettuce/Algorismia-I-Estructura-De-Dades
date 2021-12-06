@@ -10,7 +10,7 @@ public class Curs implements IntfDades {
     protected int[] referenciesAss;
     // Variable que compta quantes Assignatures s'han afegit al curs
     protected int nAss;
-    protected boolean esFP;
+   
 
 
     public Curs(String nom, int codi) {
@@ -31,9 +31,6 @@ public class Curs implements IntfDades {
         referenciesAss=null;
     }
     
-    public boolean esFP(){
-        return esFP;
-    }
     
     @Override
     public String getNom() {

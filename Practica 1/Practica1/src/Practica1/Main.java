@@ -1,5 +1,5 @@
 package Practica1;
-
+//uwu
 import ClassesModel.Assignatura;
 import ClassesModel.Curs;
 import java.awt.*;
@@ -54,6 +54,7 @@ public class Main extends JFrame {
         JTextArea label = new JTextArea();
         label.setText(text);
         label.setSize(600, 800);
+        label.setEditable(false);
         funcions.add(label);
         // Per evitar problemes d'actualització de finestra
         setVisible(true);
@@ -224,17 +225,16 @@ public class Main extends JFrame {
 
                         // Eliminam els estudiant de cada assignatura
                         for (int i = 0; i < refAss.length; i++) {
-                            Assignatura ass=assignatures.getElement(refAss[i]);
+                            Assignatura ass = assignatures.getElement(refAss[i]);
                             ass.eliminarEstudiants();
                         }
                         // Eliminam assignatures
                         cursB.eliminarAss();
                         // Eliminam els cursos
                         cursos.eliminarElement(cursB.getCodi());
-                        
+
                         mostrarText("Estudiants desmatriculats satisfactoriament\nAssignatures eliminades satisfactoriament\nCurs eliminat satisfactoriament");
-                        
-                        
+
                         break;
                     case "Baixa Assignatura":
                         // Demanam a l'usuari el codi del curs del que vol eliminar l'assignatura
@@ -369,7 +369,9 @@ public class Main extends JFrame {
                 //afegir l'estudiant a la llista global de estudiants
                 cercada = assignatures.getElement(codi);
                 cercada.afegirEstudiant(est);
-                estudiants.setPrimer(alumne);
+                estudiants.afegirSeg(alumne);
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR EN L'ENTRADA DE DADES");
             }
         }
 
@@ -379,12 +381,16 @@ public class Main extends JFrame {
             Curs curs = cursos.getElement(Integer.parseInt(resultatUsuari));
             int[] ass_curs;
             Assignatura aux;
+            Llista_RefEst ref;
+            String str;
+            String str2[];
             //Si s'ha trobat el curs
             if (curs != null) {
                 //Obtenem les assignatures del curs i les mostram per pantalla
 
                 System.out.println(curs.toString());
-                System.out.println("\n");
+
+                str = "El curs seleccionat és" + curs.toString() + "\n" + "Les assignatures són: \n";
                 //Ordenam les assignatures del curs
                 curs.ordenacioReferencies();
                 // Les guardam per poder imprimir-les per pantalla
@@ -393,33 +399,44 @@ public class Main extends JFrame {
                 for (int i = 0; i < ass_curs.length; i++) {
                     aux = assignatures.getElement(ass_curs[i]);
                     System.out.println(aux.toString());
+                    str = str + aux.toString2() + "\n Els estudiants de cada assignatura són:";
+
+                    //Obtenim referencies estudiants de l'assignatura
+                    ref = aux.getLlistaRefEst();
+                    str2 = estudiants.ordrealfabetic(ref, estudiants);
+                    for (int j = 0; j < str2.length; j++) {
+                        str = str + str2[j] + "\n";
+                    }
                 }
+
+                mostrarText(str);
+
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR: NO S'HA TROBAT EL CURS");
             }
         }
 
         public void impressioAss(String resultatUsuari) {
+            String str;
             //Aquest és el codi de cerca
             int c = Integer.parseInt(resultatUsuari);
             //Ens situam en el primer curs de la llista
             Curs aux = cursos.getPrimer();
             //Obtenim array de referencies d'assigantures del curs
             int codis[];
-            //Recorrem llista de cursos
-            while ((aux != null)) {
-                codis = aux.getReferenciesAss();
-                //Recorrem array de ref assignatures
-                for (int i = 0; i < codis.length; i++) {
-                    //Si es el mateix codi obtenim curs i sortim bucle
-                    if (c == codis[i]) {
-                        System.out.println(aux.toString());
+            
+            Assignatura aux2=assignatures.getElement(c);;
+            System.out.println(aux2.toString());
+            str= "L'assignatura és"+aux2.toString()+"\n Els estudiants són:\n";
+            Llista_RefEst ref;
+            String str2 [];
+                //Obtenim referencies estudiants de l'assignatura
+                    ref=aux2.getLlistaRefEst();
+                    str2=estudiants.ordrealfabetic(ref,estudiants); 
+                    for (int j = 0; j < str2.length; j++) {
+                     str=str +str2[j]+"\n";   
                     }
-                }
-                //Continuam itinerant a la llista i obtenim array ref
-                aux = aux.getSeg();
-
-            }
+           mostrarText(str); 
         }
     }
 

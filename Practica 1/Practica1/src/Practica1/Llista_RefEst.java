@@ -16,6 +16,19 @@ public class Llista_RefEst implements IntfLlista {
 
     NodeReferenciaEstudiant primer = null;
 
+    
+    // Mètode per obtenir una array amb tots els dnis dels estudiants de la llista
+    public int[] getDnis() {
+        int[] dnis = new int[length()];
+        NodeReferenciaEstudiant aux = primer;
+
+        for (int i = 0; i < dnis.length; i++) {
+            dnis[i] = aux.getCodi();
+            aux.getSeg();
+        }
+        return dnis;
+    }
+
     @Override
     public int length() {
         int length = 0;
@@ -67,13 +80,13 @@ public class Llista_RefEst implements IntfLlista {
         for (int i = 0; i < N - 1; i++) {
             for (int j = 0; j < N - 1; j++) {
                 // Si l'element j és major que l'element j+1 intercanviam posicions
-                if (getElement(j).getCodi() > getElement(j+1).getCodi()) {
+                if (getElement(j).getCodi() > getElement(j + 1).getCodi()) {
                     // Guardam l'element j
                     NodeReferenciaEstudiant aux = getElement(j);
                     // Llevam l'element j de la llista de manera que l'element j+1 passa a ocupar la posició j
                     eliminarElement(j);
                     // Afegim el node que ens hem guardat abans a la posició j+1
-                    afegirElement(aux,j+1);
+                    afegirElement(aux, j + 1);
                 }
             }
         }

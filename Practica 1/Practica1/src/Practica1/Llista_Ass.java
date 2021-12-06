@@ -110,25 +110,17 @@ public class Llista_Ass implements IntfLlista {
         }
         return comptador;
     }
-    
+
     // Mètode que retorna l'element i-éssim de la llista
-    public Assignatura getElementPos(int i){
-        Assignatura retorn=primer;
-        for(int j=0;(j<i)&&(retorn!=null);j++){
-            retorn=retorn.getSeg();
+    public Assignatura getElementPos(int i) {
+        Assignatura retorn = primer;
+        for (int j = 0; (j < i) && (retorn != null); j++) {
+            retorn = retorn.getSeg();
         }
-        
+
         return retorn;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     //Mètode implementa un cercador de cursos segons el codi pasat per param
     @Override
     public Assignatura getElement(int codi) {
