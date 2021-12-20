@@ -6,6 +6,7 @@
 package Practica1;
 
 import ClassesModel.Assignatura;
+import ClassesModel.Curs;
 
 /**
  *
@@ -15,8 +16,8 @@ public class Ass_Optativa extends Assignatura {
 
     protected String perfil;
 
-    public Ass_Optativa(String nom, int codi, int opcio) {
-        super(nom, codi);
+    public Ass_Optativa(String nom, int codi, int opcio,Curs curs) {
+        super(nom, codi, curs);
         switch (opcio) {
             case 1:
                 perfil = "Pràctic";
@@ -41,7 +42,8 @@ public class Ass_Optativa extends Assignatura {
 
     @Override
     public String toString() {
-       return "Nom: " +nom+" Codi: "+ codi + "Optativa{" + "perfil=" + perfil + '}';
+        return "Nom: " + nom + " Codi: " + codi + " Tipus: Optativa" + "Perfil: " + perfil + "}\n"
+                + "\t del Curs: "+curs.toString();
     }
-    
+
 }
