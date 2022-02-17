@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import static java.awt.Color.*;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -45,6 +44,11 @@ public class Practica2 extends JFrame {
         crearMenu();
 
         setDefaultCloseOperation(Practica2.EXIT_ON_CLOSE);
+        //TITULO
+        setTitle("BACKTRACKING-ALGORÍSMIA I ESTRUCTURA DE DADES- 2021-2021 - UIB");
+        setSize(1000, 845);
+        // EN EJECUTARLO SALDRÁ EN EL CENTRO DE LA PANTALLA
+        setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
@@ -73,10 +77,10 @@ public class Practica2 extends JFrame {
     private void imprimirTauler(int[][] tauler, int n, int opcio, String posicio) {
         // Rebem la representació en String del tauler i el mostram per pantalla
         // El paràmetre opcio serveix per mirar si hem d'imprimir l'exercici dels cavalls o de les reines
-
         switch (opcio) {
             // Cas cavalls
             case 1:
+                
                 JPanel frame = new JPanel();
                 JPanel squares[][] = new JPanel[n][n];
 
@@ -102,10 +106,13 @@ public class Practica2 extends JFrame {
                     }
                 }
                 finestra.add(frame, posicio);
+                finestra.revalidate();
+                finestra.repaint();
                 setVisible(true);
                 break;
             // Cas reines
             case 2:
+                
                 ImageIcon foto = new ImageIcon("pixel_art.png");
                 Image img = foto.getImage();
 
@@ -135,6 +142,8 @@ public class Practica2 extends JFrame {
                     }
                 }
                 finestra.add(frameR, posicio);
+                finestra.revalidate();
+                finestra.repaint();
                 setVisible(true);
                 break;
         }
@@ -314,9 +323,11 @@ public class Practica2 extends JFrame {
         public void actionPerformed(ActionEvent ae) {
             switch (ae.getActionCommand()) {
                 case "Cavalls":
+                    finestra.getContentPane().removeAll();
                     cavalls();
                     break;
                 case "Reines":
+                    finestra.getContentPane().removeAll();
                     reines();
                     break;
             }
